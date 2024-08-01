@@ -103,72 +103,7 @@ platform :ios do
 end
 ```
 
-### Step 6: Update `ci.yml` for iOS Deployment
-
-Modify the `ci.yml` file to include the Fastlane deployment step for iOS:
-
-```yaml
-...
-...
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        platform: [ios, android]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.3.0'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Set up environment for ${{ matrix.platform }}
-        run: |
-          if [ "${{ matrix.platform }}" == "android" ]; then
-            sudo apt-get update
-            sudo apt-get install -y android-sdk
-            curl -s "https://get.sdkman.io" | bash
-            source "$HOME/.sdkman/bin/sdkman-init.sh"
-            sdk install gradle 8.0.2
-            sdk install java 17.0.1-tem
-          elif [ "${{ matrix.platform }}" == "ios" ]; then
-            sudo gem install cocoapods
-            brew install fastlane
-          fi
-
-      - name: Run tests
-        run: |
-          if [ "${{ matrix.platform }}" == "android" ]; then
-            ./gradlew test
-          elif [ "${{ matrix.platform }}" == "ios" ]; then
-            xcodebuild -workspace ios/YourApp.xcworkspace -scheme YourApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.2' test
-          fi
-
-      - name: Deploy to TestFlight
-        if: matrix.platform == 'ios'
-        run: |
-          fastlane beta
-        env:
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-```
-
-### Step 7: Trigger the Workflow
+### Step 6: Trigger the Workflow
 
 Push your changes to the `main` branch or open a pull request to trigger the workflow. GitHub Actions will automatically run the pipeline based on the configuration in `ci.yml`.
 
