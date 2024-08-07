@@ -178,41 +178,43 @@ Electron.js is used for creating desktop applications with a single codebase tha
    ```
 
 2. **Create a `webpack.config.js` file:**
-   ```js
-   const path = require('path');
-   const HtmlWebpackPlugin = require('html-webpack-plugin');
+  ```
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-   module.exports = {
-     entry: './src/index.tsx',
-     output: {
-       path: path.resolve(__dirname, 'dist'),
-       filename: 'bundle.js',
-     },
-     resolve: {
-       extensions: ['.ts', '.tsx', '.js'],
-     },
-     module: {
-       rules: [
-         {
-           test: /\.tsx?$/,
-           use: 'ts-loader',
-           exclude: /node_modules/,
-         },
-       ],
-     },
-     plugins: [
-       new HtmlWebpackPlugin({
-         template: './src/index.html',
-       }),
-     ],
-     devServer: {
-       contentBase: path.join(__dirname, 'dist'),
-       compress: true,
-       port: 9000,
-       historyApiFallback: true,
-     },
-   };
-   ```
+module.exports = {
+  entry: './src/index.tsx',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+  },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
+  ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 9000,
+    historyApiFallback: true,
+  },
+};
+```
 
 ### Step 5: Set Up Electron
 
