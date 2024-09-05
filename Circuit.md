@@ -1,102 +1,141 @@
-To fulfill your requirement of drawing a circuit diagram with specific components like relays, grounds, information boxes, and connections, we can use SVG combined with React for precise control over the design.
+The implementation you described involves adding vertical and horizontal lines to represent electrical connections, ensuring the start and end connections are correctly aligned within the circuit layout. Let's refine the React Flow example to incorporate vertical and horizontal lines, which simulate the circuit paths and connect components accurately.
 
-Here's a detailed step-by-step approach to implement your circuit diagram using SVG within React:
+### Revised Implementation Details
 
-### **1. Basic Structure Explanation**
-- **Horizontal Line**: A main line with multiple relay points.
-- **Relays**: Open relays placed along the horizontal line.
-- **Ground**: A ground symbol positioned below each relay.
-- **Info Boxes**: Text boxes next to each relay.
-- **M Symbol**: Positioned near certain points for measurement or control indication.
-- **Connections**: All elements are connected appropriately.
+Here's an enhanced version of the setup that includes vertical and horizontal line components and handles connections start and end as per the circuit requirements.
 
-### **2. Setting Up Your React Project**
-If you haven't already, create a new React project:
-```bash
-npx create-react-app circuit-diagram
-cd circuit-diagram
+### Step 1: Update the JSON Structure
+
+We need to update the JSON to include nodes representing vertical and horizontal lines and to ensure proper connections between them.
+
+```json
+// circuit.json
+{
+  "nodes": [
+    { "id": "1", "type": "horizontalLine", "position": { "x": 50, "y": 100 }, "data": {} },
+    { "id": "2", "type": "relay", "position": { "x": 70, "y": 100 }, "data": { "label": "Relay 1" } },
+    { "id": "3", "type": "ground", "position": { "x": 70, "y": 150 }, "data": { "label": "Ground 1" } },
+    { "id": "4", "type": "textbox", "position": { "x": 200, "y": 100 }, "data": { "label": "16k" } },
+    { "id": "5", "type": "verticalLine", "position": { "x": 250, "y": 50 }, "data": {} },
+    { "id": "6", "type": "relay", "position": { "x": 250, "y": 100 }, "data": { "label": "Relay 2" } },
+    { "id": "7", "type": "ground", "position": { "x": 250, "y": 150 }, "data": { "label": "Ground 2" } }
+  ],
+  "edges": [
+    { "id": "e1-2", "source": "1", "target": "2", "type": "smoothstep" },
+    { "id": "e2-3", "source": "2", "target": "3", "type": "smoothstep" },
+    { "id": "e2-4", "source": "2", "target": "4", "type": "smoothstep" },
+    { "id": "e4-5", "source": "4", "target": "5", "type": "smoothstep" },
+    { "id": "e5-6", "source": "5", "target": "6", "type": "smoothstep" },
+    { "id": "e6-7", "source": "6", "target": "7", "type": "smoothstep" }
+  ]
+}
 ```
 
-### **3. Creating the SVG Component**
-We will create an SVG component that represents the circuit diagram as you described.
+### Step 2: Define Custom Node Components
 
-**`CircuitDiagram.js`**
-```javascript
+Create new components for the vertical and horizontal lines to represent electrical paths.
+
+```tsx
+// components/CustomNodes.tsx
 import React from 'react';
 
-const CircuitDiagram = () => {
-  return (
-    <svg width="800" height="400" style={{ border: '1px solid #ccc' }}>
-      {/* Main horizontal line */}
-      <line x1="50" y1="100" x2="750" y2="100" stroke="black" strokeWidth="2" />
+// Relay Component
+export const RelayNode = ({ data }: any) => (
+  <div style={{ padding: 10, border: '1px solid black' }}>
+    {data.label}
+  </div>
+);
 
-      {/* Repeated blocks of relay, ground, and info box */}
-      {[...Array(4)].map((_, index) => {
-        const xPosition = 150 + index * 150; // Adjust position for each set
-        return (
-          <g key={index}>
-            {/* Open relay */}
-            <circle cx={xPosition} cy="100" r="10" stroke="black" fill="white" strokeWidth="2" />
+// Ground Component
+export const GroundNode = ({ data }: any) => (
+  <div style={{ padding: 10, border: '1px solid green' }}>
+    {data.label}
+  </div>
+);
 
-            {/* Ground symbol */}
-            <line x1={xPosition} y1="110" x2={xPosition} y2="140" stroke="black" strokeWidth="2" />
-            <line x1={xPosition - 10} y1="140" x2={xPosition + 10} y2="140" stroke="black" strokeWidth="2" />
-            <line x1={xPosition - 5} y1="145" x2={xPosition + 5} y2="145" stroke="black" strokeWidth="2" />
-            <line x1={xPosition - 2} y1="150" x2={xPosition + 2} y2="150" stroke="black" strokeWidth="2" />
+// Text Box Component
+export const TextBoxNode = ({ data }: any) => (
+  <div style={{ padding: 10, border: '1px solid blue' }}>
+    {data.label}
+  </div>
+);
 
-            {/* Info box next to relay */}
-            <rect x={xPosition + 20} y="80" width="50" height="30" stroke="black" fill="none" />
-            <text x={xPosition + 25} y="100" fontSize="12">Test {index + 1}</text>
+// Horizontal Line Component
+export const HorizontalLineNode = () => (
+  <div style={{ width: 100, height: 2, backgroundColor: 'gray' }} />
+);
 
-            {/* M Symbol */}
-            <text x={xPosition} y="50" fontSize="16" fontWeight="bold">M</text>
+// Vertical Line Component
+export const VerticalLineNode = () => (
+  <div style={{ width: 2, height: 100, backgroundColor: 'gray' }} />
+);
+```
 
-            {/* Vertical connection from the main line */}
-            <line x1={xPosition} y1="100" x2={xPosition} y2="50" stroke="black" strokeWidth="2" />
-          </g>
-        );
-      })}
+### Step 3: Update the Main App Component
 
-      {/* End connections to start and end points */}
-      <circle cx="50" cy="100" r="5" fill="black" />
-      <circle cx="750" cy="100" r="5" fill="black" />
-    </svg>
-  );
+Ensure the new node types are registered, and connections are correctly displayed.
+
+```tsx
+// App.tsx
+import React, { useCallback, useState } from 'react';
+import ReactFlow, {
+  ReactFlowProvider,
+  addEdge,
+  Background,
+  Controls,
+  Node,
+  Edge,
+} from 'reactflow';
+import 'reactflow/dist/style.css';
+import { 
+  RelayNode, 
+  GroundNode, 
+  TextBoxNode, 
+  HorizontalLineNode, 
+  VerticalLineNode 
+} from './components/CustomNodes';
+
+import circuitData from './circuit.json';
+
+// Define node types
+const nodeTypes = {
+  relay: RelayNode,
+  ground: GroundNode,
+  textbox: TextBoxNode,
+  horizontalLine: HorizontalLineNode,
+  verticalLine: VerticalLineNode,
 };
 
-export default CircuitDiagram;
-```
+const App: React.FC = () => {
+  const [nodes, setNodes] = useState<Node[]>(circuitData.nodes);
+  const [edges, setEdges] = useState<Edge[]>(circuitData.edges);
 
-### **4. Render the Circuit Diagram in Your App**
+  const onConnect = useCallback((params: Edge) => setEdges((eds) => addEdge(params, eds)), []);
 
-**`App.js`**
-```javascript
-import React from 'react';
-import CircuitDiagram from './CircuitDiagram';
-
-function App() {
   return (
-    <div className="App">
-      <h1>Circuit Diagram</h1>
-      <CircuitDiagram />
-    </div>
+    <ReactFlowProvider>
+      <div style={{ height: '100vh' }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onConnect={onConnect}
+          nodeTypes={nodeTypes}
+          fitView
+        >
+          <Background />
+          <Controls />
+        </ReactFlow>
+      </div>
+    </ReactFlowProvider>
   );
-}
+};
 
 export default App;
 ```
 
-### **Explanation of the SVG Structure:**
-1. **Main Horizontal Line**: Drawn across the SVG to represent the main circuit path.
-2. **Open Relays**: Circles placed along the line to represent the relays.
-3. **Ground Symbols**: Lines and smaller lines to mimic standard ground symbols below each relay.
-4. **Info Boxes**: Rectangles with text next to each relay to represent test information or labels.
-5. **M Symbol**: Placed near each connection to represent the measurement or control indicator.
-6. **Vertical Connections**: Lines drawn vertically connecting relays to other components.
-7. **End Points**: Start and end of the main line connected with dots.
+### Key Features Added:
+1. **Vertical and Horizontal Lines**: Represent connections between components like relays and grounds, enhancing the visual circuit layout.
+2. **Dynamic Node Management**: Nodes and edges can be easily manipulated through JSON, allowing for adding/removing components.
+3. **Connection Start and End Points**: Properly defined nodes and edges ensure that connections start and end at the correct points, accurately simulating circuit behavior.
 
-### **Customization:**
-- Adjust positions, colors, or styles as needed to better match your circuit design requirements.
-- Add interactivity if required using React event handlers.
-
-This approach ensures that your circuit diagram is accurately rendered with SVG, providing flexibility and clarity for your specific layout needs.
+This setup allows you to render and interact with a circuit diagram dynamically, where nodes represent components and lines represent electrical connections, all adjustable via JSON. Let me know if you need further adjustments or features!
