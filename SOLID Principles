@@ -1,0 +1,15 @@
+Single Responsibility Principle (SRP)
+Image: A robot with multiple arms, each performing a different task (e.g., painting, welding, assembling).
+Caption: "A robot that does too much is a robot that does nothing well."
+Open-Closed Principle (OCP)
+Image: A modular robot with interchangeable parts, allowing for new functionalities to be added without modifying the core structure.
+Caption: "Adaptable robots for a changing world."
+Liskov Substitution Principle (LSP)
+Image: A hierarchy of robots, with child robots inheriting the capabilities of their parent robots but potentially adding new features.
+Caption: "Like father, like son (or daughter)."
+Interface Segregation Principle (ISP)
+Image: A robot with multiple specialized tools, each designed for a specific task.
+Caption: "The right tool for the right job."
+Dependency Inversion Principle (DIP)
+Image: A robot that can use different power sources (e.g., batteries, solar panels) without changing its internal structure.
+Caption: "Independent robots for a flexible future."
