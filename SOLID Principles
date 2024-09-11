@@ -13,3 +13,82 @@ Caption: "The right tool for the right job."
 Dependency Inversion Principle (DIP)
 Image: A robot that can use different power sources (e.g., batteries, solar panels) without changing its internal structure.
 Caption: "Independent robots for a flexible future."
+
+
+The SOLID principles are a set of five design principles in object-oriented programming that aim to make software designs more understandable, flexible, and maintainable. While I can't provide images directly, I can describe each principle and suggest where you might find visual resources.
+
+### SOLID Principles
+
+1. **Single Responsibility Principle (SRP)**:
+   - **Description**: A class should have only one reason to change, meaning it should only have one job or responsibility.
+   - **Image**: Search for "Single Responsibility Principle diagram" or "SRP SOLID principle image" to find visual representations of this principle.
+
+2. **Open/Closed Principle (OCP)**:
+   - **Description**: Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. This means you should be able to add new functionality without changing existing code.
+   - **Image**: Look for "Open Closed Principle diagram" or "OCP SOLID principle image" for visual explanations.
+
+3. **Liskov Substitution Principle (LSP)**:
+   - **Description**: Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+   - **Image**: Search for "Liskov Substitution Principle diagram" or "LSP SOLID principle image".
+
+4. **Interface Segregation Principle (ISP)**:
+   - **Description**: A client should not be forced to implement interfaces it doesn’t use. Instead, interfaces should be client-specific.
+   - **Image**: Look for "Interface Segregation Principle diagram" or "ISP SOLID principle image".
+
+5. **Dependency Inversion Principle (DIP)**:
+   - **Description**: High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces). Abstractions should not depend on details. Details should depend on abstractions.
+   - **Image**: Search for "Dependency Inversion Principle diagram" or "DIP SOLID principle image".
+
+### Where to Find Images
+
+1. **Google Images**: Search for the specific principle followed by "diagram" or "image."
+2. **Educational Websites**: Websites like Coursera, Udemy, or educational blogs often have diagrams explaining these principles.
+3. **Design and Programming Blogs**: Many technical blogs and articles on software design include visual representations of these principles.
+4. **Books**: Books on design patterns and software engineering, such as "Clean Code" by Robert C. Martin, often include diagrams and explanations of SOLID principles.
+
+By searching these terms, you should be able to find downloadable images or diagrams that illustrate each of the SOLID principles effectively.
+
+
+Certainly! Here’s a breakdown of the purpose and focus for each of the SOLID principles:
+
+### 1. **Single Responsibility Principle (SRP)**
+
+- **Purpose**: To ensure that a class or module has only one reason to change, meaning it should only have one responsibility or job. This makes the class easier to understand, maintain, and modify.
+
+- **Focus**: 
+  - **Class Design**: Each class should encapsulate a single piece of functionality.
+  - **Maintainability**: Reduces the complexity of code changes, since changes in one responsibility don’t affect other unrelated responsibilities.
+
+### 2. **Open/Closed Principle (OCP)**
+
+- **Purpose**: To design software entities (classes, modules, functions, etc.) so they are open for extension but closed for modification. This means you should be able to add new functionality without changing existing code, thereby reducing the risk of introducing bugs in stable code.
+
+- **Focus**: 
+  - **Extensibility**: Enable new features and changes through extension rather than modification.
+  - **Stability**: Preserve the integrity of existing code and minimize risks associated with changes.
+
+### 3. **Liskov Substitution Principle (LSP)**
+
+- **Purpose**: To ensure that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program. This maintains the consistency of the program when a subclass is used in place of a superclass.
+
+- **Focus**:
+  - **Substitutability**: Ensure subclasses honor the contracts established by their parent classes.
+  - **Behavior Consistency**: Subclasses should be able to replace their parent classes without altering the desirable properties of the program.
+
+### 4. **Interface Segregation Principle (ISP)**
+
+- **Purpose**: To avoid forcing classes to implement interfaces they don’t use. Instead, interfaces should be tailored to specific client needs. This reduces the impact of changes and avoids the complexity of implementing unused methods.
+
+- **Focus**:
+  - **Client-Specific Interfaces**: Design interfaces that are specific to the needs of clients.
+  - **Minimize Unused Functionality**: Prevent classes from being burdened with methods that are not relevant to their purpose.
+
+### 5. **Dependency Inversion Principle (DIP)**
+
+- **Purpose**: To reduce the coupling between high-level modules (which should contain the core functionality) and low-level modules (which should provide specific implementations). Both should depend on abstractions (e.g., interfaces). This makes the system more modular and adaptable to changes.
+
+- **Focus**:
+  - **Abstraction**: High-level modules should not depend on low-level modules but rather on abstractions.
+  - **Flexibility**: Achieve loose coupling by depending on abstract interfaces, allowing for easy replacement and extension of implementations.
+
+Each principle contributes to creating software that is more maintainable, flexible, and robust by addressing specific aspects of software design.
