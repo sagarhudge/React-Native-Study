@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Commands Cheat Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #2c3e50;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Git Commands Cheat Sheet</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+                <th>Copy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>git init</code></td>
+                <td>Initialize a new Git repository.</td>
+                <td><button onclick="copyToClipboard('git init')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git clone [url]</code></td>
+                <td>Clone a repository from a URL.</td>
+                <td><button onclick="copyToClipboard('git clone [url]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git add [file]</code></td>
+                <td>Stage changes to a file.</td>
+                <td><button onclick="copyToClipboard('git add [file]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git commit -m "[message]"</code></td>
+                <td>Commit changes with a message.</td>
+                <td><button onclick="copyToClipboard('git commit -m \"[message]\"')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git status</code></td>
+                <td>Show the working tree status.</td>
+                <td><button onclick="copyToClipboard('git status')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git pull</code></td>
+                <td>Fetch and integrate with another repository or a local branch.</td>
+                <td><button onclick="copyToClipboard('git pull')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git push</code></td>
+                <td>Update remote refs along with associated objects.</td>
+                <td><button onclick="copyToClipboard('git push')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git branch</code></td>
+                <td>List, create, or delete branches.</td>
+                <td><button onclick="copyToClipboard('git branch')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git checkout [branch]</code></td>
+                <td>Switch to a specified branch.</td>
+                <td><button onclick="copyToClipboard('git checkout [branch]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git merge [branch]</code></td>
+                <td>Merge a branch into the current branch.</td>
+                <td><button onclick="copyToClipboard('git merge [branch]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git log</code></td>
+                <td>Show commit logs.</td>
+                <td><button onclick="copyToClipboard('git log')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git diff</code></td>
+                <td>Show changes between commits, commit and working tree, etc.</td>
+                <td><button onclick="copyToClipboard('git diff')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git reset [file]</code></td>
+                <td>Unstage a file while retaining its changes.</td>
+                <td><button onclick="copyToClipboard('git reset [file]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git rm [file]</code></td>
+                <td>Remove a file from the working directory and the index.</td>
+                <td><button onclick="copyToClipboard('git rm [file]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git stash</code></td>
+                <td>Save changes temporarily to a stack.</td>
+                <td><button onclick="copyToClipboard('git stash')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git stash apply</code></td>
+                <td>Apply changes saved in the stash.</td>
+                <td><button onclick="copyToClipboard('git stash apply')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git stash drop</code></td>
+                <td>Remove a stash entry.</td>
+                <td><button onclick="copyToClipboard('git stash drop')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git tag [name]</code></td>
+                <td>Create a new tag.</td>
+                <td><button onclick="copyToClipboard('git tag [name]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git fetch</code></td>
+                <td>Download objects and refs from another repository.</td>
+                <td><button onclick="copyToClipboard('git fetch')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git remote -v</code></td>
+                <td>List the remote connections.</td>
+                <td><button onclick="copyToClipboard('git remote -v')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git remote add [name] [url]</code></td>
+                <td>Add a new remote repository.</td>
+                <td><button onclick="copyToClipboard('git remote add [name] [url]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git remote remove [name]</code></td>
+                <td>Remove a remote repository.</td>
+                <td><button onclick="copyToClipboard('git remote remove [name]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git cherry-pick [commit]</code></td>
+                <td>Apply changes from a specific commit.</td>
+                <td><button onclick="copyToClipboard('git cherry-pick [commit]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git rebase [branch]</code></td>
+                <td>Reapply commits on top of another base tip.</td>
+                <td><button onclick="copyToClipboard('git rebase [branch]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git rebase --continue</code></td>
+                <td>Continue rebasing after resolving conflicts.</td>
+                <td><button onclick="copyToClipboard('git rebase --continue')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git rebase --abort</code></td>
+                <td>Abort the rebase process.</td>
+                <td><button onclick="copyToClipboard('git rebase --abort')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git merge --abort</code></td>
+                <td>Abort the merge process.</td>
+                <td><button onclick="copyToClipboard('git merge --abort')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git commit --amend</code></td>
+                <td>Modify the last commit.</td>
+                <td><button onclick="copyToClipboard('git commit --amend')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git log --oneline</code></td>
+                <td>Show a brief log of commits.</td>
+                <td><button onclick="copyToClipboard('git log --oneline')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git reflog</code></td>
+                <td>Show reference logs.</td>
+                <td><button onclick="copyToClipboard('git reflog')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git show [commit]</code></td>
+                <td>Show various types of objects.</td>
+                <td><button onclick="copyToClipboard('git show [commit]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git config --global user.name "[name]"</code></td>
+                <td>Set a name for your Git configuration.</td>
+                <td><button onclick="copyToClipboard('git config --global user.name \"[name]\"')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git config --global user.email "[email]"</code></td>
+                <td>Set an email for your Git configuration.</td>
+                <td><button onclick="copyToClipboard('git config --global user.email \"[email]\"')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git config --list</code></td>
+                <td>List all Git configuration settings.</td>
+                <td><button onclick="copyToClipboard('git config --list')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git clean -f</code></td>
+                <td>Remove untracked files from the working directory.</td>
+                <td><button onclick="copyToClipboard('git clean -f')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git tag -d [tag]</code></td>
+                <td>Delete a tag.</td>
+                <td><button onclick="copyToClipboard('git tag -d [tag]')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git log --graph</code></td>
+                <td>Display a graphical representation of the commit history.</td>
+                <td><button onclick="copyToClipboard('git log --graph')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git diff --cached</code></td>
+                <td>Show changes staged for the next commit.</td>
+                <td><button onclick="copyToClipboard('git diff --cached')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><code>git blame [file]</code></td>
+                <td>Show what revision and author last modified each line of a file.</td>
+                <td><button onclick="copyToClipboard('git blame [file]')">Copy</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function copyToClipboard(text) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Copied to clipboard: ' + text);
+        }
+    </script>
+</body>
+</html>
