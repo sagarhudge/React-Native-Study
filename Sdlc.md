@@ -1,3 +1,137 @@
+
+Here’s a detailed overview of each stage of the Software Development Life Cycle (SDLC), along with the roles typically involved in each phase.
+
+1. Requirement Analysis
+
+Activities:
+
+Gather stakeholder requirements.
+
+Analyze and document functional and non-functional requirements.
+
+
+Roles:
+
+Business Analyst: Facilitates discussions with stakeholders to gather requirements.
+
+Product Owner: Represents stakeholders and ensures requirements align with business goals.
+
+Project Manager: Oversees the process and ensures timelines are set for requirement gathering.
+
+
+2. Planning
+
+Activities:
+
+Define project scope, timelines, budget, and resources.
+
+Identify risks and develop mitigation strategies.
+
+
+Roles:
+
+Project Manager: Leads the planning process, ensuring clear objectives and timelines.
+
+Technical Lead: Assesses technical feasibility and resource needs.
+
+Business Analyst: Contributes insights on requirements to inform planning.
+
+
+3. Design
+
+Activities:
+
+Create architecture and design specifications.
+
+Develop UI/UX prototypes and database designs.
+
+
+Roles:
+
+Architect: Designs the overall system architecture.
+
+UI/UX Designer: Develops user interfaces and user experience designs.
+
+Database Administrator: Designs database schemas and data flow.
+
+
+4. Development
+
+Activities:
+
+Write and compile the code according to specifications.
+
+Integrate different software components.
+
+
+Roles:
+
+Developers: Write and test the code for the software.
+
+Front-end Developer: Focuses on the user interface and client-side logic.
+
+Back-end Developer: Manages server-side logic and database interactions.
+
+
+5. Testing
+
+Activities:
+
+Validate the software through various testing methods.
+
+Identify and fix bugs.
+
+
+Roles:
+
+Quality Assurance (QA) Engineer: Designs and executes test cases.
+
+Test Manager: Oversees the testing process and manages the QA team.
+
+User Acceptance Tester (UAT): Represents end-users in validating the software.
+
+
+6. Deployment
+
+Activities:
+
+Release the software to a production environment.
+
+Monitor the deployment process for issues.
+
+
+Roles:
+
+DevOps Engineer: Manages deployment processes and environment configurations.
+
+System Administrator: Ensures server and infrastructure readiness.
+
+Project Manager: Coordinates the deployment activities and communicates with stakeholders.
+
+
+7. Maintenance
+
+Activities:
+
+Provide ongoing support and fix issues post-deployment.
+
+Implement updates and enhancements.
+
+
+Roles:
+
+Support Engineer: Handles user-reported issues and provides technical support.
+
+Developer: Works on updates, patches, and feature enhancements.
+
+Product Owner: Gathers feedback for future improvements and prioritizes updates.
+
+
+Summary
+
+Each stage of the SDLC involves specific activities and roles that contribute to the successful development and delivery of software. By defining these roles clearly, organizations can ensure effective collaboration and communication throughout the software development process.
+
+
 What is SDLC?
 
 The Software Development Life Cycle (SDLC) is a structured process used for developing software applications. It outlines the stages involved in software development, from initial planning to deployment and maintenance. The SDLC provides a clear framework for teams to follow, ensuring that software is delivered in a systematic and efficient manner.
