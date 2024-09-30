@@ -34,6 +34,49 @@ Key Objectives:
 
 ---
 
+Types of Errors Handled by Error Boundaries
+
+Error Boundaries catch errors in:
+
+Render phase: Errors occurring while rendering a component.
+
+Lifecycle methods: Errors inside methods like componentDidMount, componentDidUpdate, etc.
+
+Constructor phase: Errors occurring in the component constructors.
+
+
+They do not catch:
+
+Errors inside event handlers
+
+Errors thrown in asynchronous code (such as setTimeout or promises)
+
+Errors occurring in React hooks
+
+
+3. Improvements with Error Boundaries
+
+In React Native, Error Boundaries offer the following improvements:
+
+Crash prevention: Prevents the app from crashing completely and provides a fallback UI.
+
+User experience: Ensures that users see a friendly error message rather than a blank screen.
+
+Better debugging: Helps developers by catching and logging errors, making it easier to diagnose and fix bugs.
+
+Error reporting: Can integrate with services like Sentry or Firebase Crashlytics to log and monitor errors in production environments.
+
+
+4. Benefits of Using Error Boundaries
+
+Graceful degradation: Instead of the app breaking entirely, users see a fallback UI, ensuring a smooth experience.
+
+Isolated component failures: Errors within specific components don't affect the rest of the app, ensuring other parts continue functioning properly.
+
+Error monitoring: Combined with logging, Error Boundaries allow you to monitor, report, and fix errors in production.
+
+Improved stability: Enhances the robustness of your app by isolating and handling errors in parts of the component tree.
+
 Section 1: What Are Error Boundaries?
 
 Error boundaries in React are designed to catch JavaScript errors anywhere in the child component tree and display a fallback UI. In React Native, they are particularly useful for isolating errors that could crash the whole app.
