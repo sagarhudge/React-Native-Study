@@ -262,4 +262,3 @@ By using functional components and hooks in React Native with TypeScript, error 
 ---
 
 This complete blog covers the essential concepts and advanced practices for implementing error boundaries in React Native, focusing on improving user experience and app stability using functional components and TypeScript.
-
