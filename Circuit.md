@@ -1,182 +1,149 @@
-To create a visual representation of your circuit diagram in React using JSON for configuration, you can follow these steps:
+{
+  "components": [
+    {
+      "type": "bus",
+      "start": { "x": 50, "y": 50 },
+      "end": { "x": 450, "y": 50 },
+      "label": "12K BUS SECT 2"
+    },
+    {
+      "type": "isolator",
+      "x": 100,
+      "y": 100,
+      "orientation": "horizontal",
+      "label": "33KV BS 1 PT ISOLATING DISC"
+    },
+    {
+      "type": "line",
+      "start": { "x": 100, "y": 50 },
+      "end": { "x": 100, "y": 200 }
+    },
+    {
+      "type": "breaker",
+      "x": 150,
+      "y": 150,
+      "label": "6KV BS 2 BREAKER SECT 2"
+    },
+    {
+      "type": "ground",
+      "x": 200,
+      "y": 200
+    },
+    {
+      "type": "text",
+      "x": 50,
+      "y": 250,
+      "text": "TO DUMCPT"
+    }
+  ]
+}
 
-1. **Define the JSON Configuration:**
+import React, { useState, useEffect } from 'react';
 
-   First, create a JSON file (e.g., `diagramConfig.json`) that describes the elements of the diagram:
+interface CircuitElement {
+  type: string;
+  x?: number;
+  y?: number;
+  start?: { x: number, y: number };
+  end?: { x: number, y: number };
+  label?: string;
+  orientation?: string;
+}
 
-   ```json
-   {
-     "elements": [
-       {
-         "type": "line",
-         "id": "horizontal1",
-         "points": [[0, 0], [500, 0]],
-         "style": {"stroke": "#000", "strokeWidth": 2}
-       },
-       {
-         "type": "rect",
-         "id": "relay1",
-         "x": 100,
-         "y": 20,
-         "width": 50,
-         "height": 30,
-         "style": {"fill": "#ccc", "stroke": "#000", "strokeWidth": 2}
-       },
-       {
-         "type": "text",
-         "id": "text1",
-         "x": 160,
-         "y": 40,
-         "text": "Text Box",
-         "style": {"fontSize": 12}
-       },
-       {
-         "type": "rect",
-         "id": "relay2",
-         "x": 220,
-         "y": 20,
-         "width": 50,
-         "height": 30,
-         "style": {"fill": "#ccc", "stroke": "#000", "strokeWidth": 2}
-       },
-       {
-         "type": "circle",
-         "id": "dot",
-         "cx": 300,
-         "cy": 35,
-         "r": 10,
-         "style": {"fill": "#000"}
-       },
-       {
-         "type": "line",
-         "id": "vertical1",
-         "points": [[300, 45], [300, 150]],
-         "style": {"stroke": "#000", "strokeWidth": 2}
-       },
-       {
-         "type": "rect",
-         "id": "relay3",
-         "x": 270,
-         "y": 150,
-         "width": 50,
-         "height": 30,
-         "style": {"fill": "#ccc", "stroke": "#000", "strokeWidth": 2}
-       },
-       {
-         "type": "text",
-         "id": "text2",
-         "x": 270,
-         "y": 200,
-         "text": "Text Box",
-         "style": {"fontSize": 12}
-       },
-       {
-         "type": "line",
-         "id": "horizontal2",
-         "points": [[250, 250], [350, 250]],
-         "style": {"stroke": "#000", "strokeWidth": 2}
-       },
-       {
-         "type": "arrow",
-         "id": "arrow",
-         "points": [[300, 150], [300, 200]],
-         "style": {"stroke": "#000", "strokeWidth": 2},
-         "text": "Down Arrow with Text"
-       }
-     ]
-   }
-   ```
+interface CircuitProps {
+  data: { components: CircuitElement[] };
+}
 
-2. **Render the Diagram in React:**
+const Circuit: React.FC<CircuitProps> = ({ data }) => {
 
-   Next, use React to render this configuration. You can use libraries like `react-svg` or `react-d3` for drawing. Here's an example using basic SVG elements:
+  const renderComponent = (component: CircuitElement, index: number) => {
+    switch (component.type) {
+      case 'bus':
+        return (
+          <g key={index}>
+            <line
+              x1={component.start?.x} y1={component.start?.y}
+              x2={component.end?.x} y2={component.end?.y}
+              stroke="black" strokeWidth="5"
+            />
+            <text x={component.start?.x} y={component.start?.y - 10} fontSize="12">{component.label}</text>
+          </g>
+        );
+      case 'line':
+        return (
+          <line
+            key={index}
+            x1={component.start?.x} y1={component.start?.y}
+            x2={component.end?.x} y2={component.end?.y}
+            stroke="black" strokeWidth="2"
+          />
+        );
+      case 'isolator':
+        return (
+          <g key={index}>
+            <rect
+              x={component.x} y={component.y}
+              width="20" height="5" fill="black"
+              transform={component.orientation === "vertical" ? "rotate(90)" : ""}
+            />
+            <text x={component.x! + 25} y={component.y! + 10} fontSize="10">{component.label}</text>
+          </g>
+        );
+      case 'breaker':
+        return (
+          <g key={index}>
+            <circle cx={component.x} cy={component.y} r="10" fill="none" stroke="black" strokeWidth="2" />
+            <text x={component.x! + 20} y={component.y! + 5} fontSize="10">{component.label}</text>
+          </g>
+        );
+      case 'ground':
+        return (
+          <g key={index}>
+            <line x1={component.x} y1={component.y} x2={component.x} y2={component.y! + 20} stroke="black" strokeWidth="2" />
+            <line x1={component.x! - 10} y1={component.y! + 20} x2={component.x! + 10} y2={component.y! + 20} stroke="black" strokeWidth="2" />
+            <line x1={component.x! - 5} y1={component.y! + 25} x2={component.x! + 5} y2={component.y! + 25} stroke="black" strokeWidth="2" />
+          </g>
+        );
+      case 'text':
+        return (
+          <text key={index} x={component.x} y={component.y} fontSize="12">{component.text}</text>
+        );
+      default:
+        return null;
+    }
+  };
 
-   ```jsx
-   import React from 'react';
-   import diagramConfig from './diagramConfig.json';
+  return (
+    <svg width="500" height="500" style={{ border: '1px solid black' }}>
+      {data.components.map((component, index) => renderComponent(component, index))}
+    </svg>
+  );
+};
 
-   const Diagram = () => {
-     const renderElement = (element) => {
-       switch (element.type) {
-         case 'line':
-           return (
-             <line
-               key={element.id}
-               x1={element.points[0][0]}
-               y1={element.points[0][1]}
-               x2={element.points[1][0]}
-               y2={element.points[1][1]}
-               stroke={element.style.stroke}
-               strokeWidth={element.style.strokeWidth}
-             />
-           );
-         case 'rect':
-           return (
-             <rect
-               key={element.id}
-               x={element.x}
-               y={element.y}
-               width={element.width}
-               height={element.height}
-               fill={element.style.fill}
-               stroke={element.style.stroke}
-               strokeWidth={element.style.strokeWidth}
-             />
-           );
-         case 'text':
-           return (
-             <text
-               key={element.id}
-               x={element.x}
-               y={element.y}
-               fontSize={element.style.fontSize}
-             >
-               {element.text}
-             </text>
-           );
-         case 'circle':
-           return (
-             <circle
-               key={element.id}
-               cx={element.cx}
-               cy={element.cy}
-               r={element.r}
-               fill={element.style.fill}
-             />
-           );
-         case 'arrow':
-           return (
-             <g key={element.id}>
-               <line
-                 x1={element.points[0][0]}
-                 y1={element.points[0][1]}
-                 x2={element.points[1][0]}
-                 y2={element.points[1][1]}
-                 stroke={element.style.stroke}
-                 strokeWidth={element.style.strokeWidth}
-               />
-               <text x={element.points[1][0]} y={element.points[1][1] - 10}>
-                 {element.text}
-               </text>
-             </g>
-           );
-         default:
-           return null;
-       }
-     };
+export default Circuit;
 
-     return (
-       <svg width="500" height="300" style={{ border: '1px solid black' }}>
-         {diagramConfig.elements.map(renderElement)}
-       </svg>
-     );
-   };
 
-   export default Diagram;
-   ```
+import React from 'react';
+import Circuit from './Circuit';
 
-In this example:
-- **`renderElement`** function handles different types of elements (`line`, `rect`, `text`, `circle`, `arrow`).
-- **SVG elements** are used to draw the diagram based on the JSON configuration.
+const App: React.FC = () => {
+  const jsonData = {
+    "components": [
+      { "type": "bus", "start": { "x": 50, "y": 50 }, "end": { "x": 450, "y": 50 }, "label": "12K BUS SECT 2" },
+      { "type": "isolator", "x": 100, "y": 100, "orientation": "horizontal", "label": "33KV BS 1 PT ISOLATING DISC" },
+      { "type": "line", "start": { "x": 100, "y": 50 }, "end": { "x": 100, "y": 200 } },
+      { "type": "breaker", "x": 150, "y": 150, "label": "6KV BS 2 BREAKER SECT 2" },
+      { "type": "ground", "x": 200, "y": 200 },
+      { "type": "text", "x": 50, "y": 250, "text": "TO DUMCPT" }
+    ]
+  };
 
-You might need to adjust the positions and styles to fit your exact requirements.
+  return (
+    <div>
+      <h1>Electrical Circuit Diagram</h1>
+      <Circuit data={jsonData} />
+    </div>
+  );
+};
+
+export default App;
