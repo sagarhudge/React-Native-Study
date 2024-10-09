@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Review Checklist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .section {
+            margin-top: 20px;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Code Review Checklist</h1>
+    <p>A code review checklist helps ensure code quality, maintainability, and adherence to best practices. Use this comprehensive template during code reviews to verify that the code meets required standards:</p>
+
+    <div class="section">
+        <h2>1. Code Functionality</h2>
+        <ul>
+            <li><input type="checkbox"> Does the code accomplish the intended task without errors?</li>
+            <li><input type="checkbox"> Are edge cases and exceptions properly handled?</li>
+            <li><input type="checkbox"> Are input validations and error handling implemented appropriately?</li>
+            <li><input type="checkbox"> Are changes backward-compatible if needed?</li>
+            <li><input type="checkbox"> Are dependencies updated or added correctly?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>2. Code Readability and Style</h2>
+        <ul>
+            <li><input type="checkbox"> Is the code easy to read and understand?</li>
+            <li><input type="checkbox"> Are functions and variables named descriptively and consistently?</li>
+            <li><input type="checkbox"> Is the code free of commented-out sections and unnecessary debug logs?</li>
+            <li><input type="checkbox"> Is the formatting (indentation, line spacing, braces) consistent?</li>
+            <li><input type="checkbox"> Are comments and documentation clear and useful, explaining complex logic?</li>
+            <li><input type="checkbox"> Is there consistent use of language-specific conventions and patterns?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>3. Code Structure and Design</h2>
+        <ul>
+            <li><input type="checkbox"> Is the code modular, separating concerns and responsibilities?</li>
+            <li><input type="checkbox"> Are functions/classes kept small and focused (Single Responsibility Principle)?</li>
+            <li><input type="checkbox"> Is code duplication avoided (e.g., by reusing common logic)?</li>
+            <li><input type="checkbox"> Are global variables minimized, and is state managed well?</li>
+            <li><input type="checkbox"> Is the code structured for extensibility and maintainability?</li>
+            <li><input type="checkbox"> Are appropriate design patterns used (e.g., MVC, Singleton, Factory)?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>4. Performance Considerations</h2>
+        <ul>
+            <li><input type="checkbox"> Are there obvious performance bottlenecks or optimization opportunities?</li>
+            <li><input type="checkbox"> Are loops and recursive functions optimized to minimize overhead?</li>
+            <li><input type="checkbox"> Is the code efficient with large data sets or expensive operations (e.g., pagination, caching)?</li>
+            <li><input type="checkbox"> Are asynchronous operations handled properly to avoid blocking the main thread?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>5. Security Best Practices</h2>
+        <ul>
+            <li><input type="checkbox"> Is sensitive data (e.g., API keys) handled securely and not exposed?</li>
+            <li><input type="checkbox"> Are input validations performed to prevent vulnerabilities (e.g., SQL Injection, XSS)?</li>
+            <li><input type="checkbox"> Are appropriate authentication and authorization mechanisms implemented?</li>
+            <li><input type="checkbox"> Is the use of external libraries safe, and are dependencies checked for known vulnerabilities?</li>
+            <li><input type="checkbox"> Is data encrypted where necessary (e.g., network communication, sensitive storage)?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>6. Testing and Test Coverage</h2>
+        <ul>
+            <li><input type="checkbox"> Are unit tests included for new and modified code?</li>
+            <li><input type="checkbox"> Are tests clear and cover various cases, including edge cases?</li>
+            <li><input type="checkbox"> Are integration and end-to-end tests present for complete user flows?</li>
+            <li><input type="checkbox"> Is the code adequately covered with automated tests (aiming for at least 80% coverage)?</li>
+            <li><input type="checkbox"> Do all tests pass without errors or warnings?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>7. Documentation</h2>
+        <ul>
+            <li><input type="checkbox"> Is the code documented with comments explaining non-obvious parts?</li>
+            <li><input type="checkbox"> Is there relevant documentation for setup, running, and testing the code (e.g., README, inline docs)?</li>
+            <li><input type="checkbox"> Are API endpoints, parameters, and expected outputs documented?</li>
+            <li><input type="checkbox"> Are configuration or environment variables explained in the documentation?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>8. Version Control and Commit Messages</h2>
+        <ul>
+            <li><input type="checkbox"> Are commit messages descriptive and follow team guidelines (e.g., include JIRA ticket numbers)?</li>
+            <li><input type="checkbox"> Is the code organized into logical commits (e.g., one feature or fix per commit)?</li>
+            <li><input type="checkbox"> Are unnecessary files (e.g., logs, temporary files) excluded from commits?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>9. Compliance with Architecture and Guidelines</h2>
+        <ul>
+            <li><input type="checkbox"> Does the code follow the team's architectural patterns and standards?</li>
+            <li><input type="checkbox"> Are there any architectural improvements or refactors needed for scalability or maintainability?</li>
+            <li><input type="checkbox"> Does the code comply with coding guidelines (e.g., linting rules, style guides)?</li>
+            <li><input type="checkbox"> Are environment-specific configurations separated from the codebase (e.g., using environment variables)?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Optional Checks (If Applicable)</h2>
+
+        <h3>10. Accessibility</h3>
+        <ul>
+            <li><input type="checkbox"> Does the code follow accessibility best practices (e.g., screen reader compatibility, keyboard navigation)?</li>
+            <li><input type="checkbox"> Are ARIA attributes and semantic HTML used appropriately?</li>
+        </ul>
+
+        <h3>11. Localization/Internationalization (i18n)</h3>
+        <ul>
+            <li><input type="checkbox"> Are strings and UI texts properly localized?</li>
+            <li><input type="checkbox"> Are date/time formats, number formats, and currencies adaptable based on locale?</li>
+        </ul>
+
+        <h3>12. API and Backend Integration</h3>
+        <ul>
+            <li><input type="checkbox"> Are API calls implemented efficiently (e.g., caching or pagination)?</li>
+            <li><input type="checkbox"> Are response data and errors handled properly (e.g., fallback behavior, retries)?</li>
+            <li><input type="checkbox"> Are appropriate HTTP methods and status codes used?</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Conclusion</h2>
+        <p>A code review checklist ensures consistency, quality, and maintainability across the codebase. It helps catch errors early, maintain standards, and support team collaboration by providing a structured approach to reviewing code.</p>
+    </div>
+
+    <footer style="text-align: center; margin-top: 30px;">
+        <p>&copy; 2024 Code Review Checklist</p>
+    </footer>
+
+</body>
+</html>
