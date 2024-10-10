@@ -1,3 +1,47 @@
+
+//snapsvg-cjs.d.ts
+declare module 'snapsvg-cjs' {
+    export interface SnapOptions {
+        // Add any specific options you want to type here
+    }
+
+    export interface Element {
+        attr(attrs: { [key: string]: any }): this;
+        transform(transformString: string): this;
+        click(handler: () => void): this;
+        // Add more methods as needed
+    }
+
+    export interface Snap {
+        line(x1: number, y1: number, x2: number, y2: number): Element;
+        rect(x: number, y: number, width: number, height: number): Element;
+        circle(cx: number, cy: number, r: number): Element;
+        path(d: string): Element;
+        image(src: string, x: number, y: number, width: number, height: number): Element;
+        text(x: number, y: number, text: string): Element;
+        clear(): void;
+        group(...elements: Element[]): Element;
+        // Add more methods as needed
+    }
+
+    export function Snap(selector: string | HTMLElement, options?: SnapOptions): Snap;
+}
+
+
+//tsconfig
+{
+    "compilerOptions": {
+        "strict": true,
+        // other options...
+    },
+    "include": [
+        "src/**/*",
+        "path/to/snapsvg-cjs.d.ts"  // Adjust the path accordingly
+    ]
+}
+
+ //main   
+
 import React, { useEffect, useRef } from 'react';
 import Snap from 'snapsvg-cjs';
 import ground from './ground.svg';
