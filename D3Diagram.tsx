@@ -11,7 +11,7 @@ interface CircuitElement {
     orientation?: string;
     x: number;
     y: number;
-    length: number;
+    length?: number; // Make length optional
     visible: boolean;
     content?: string; // Only for text elements
     row1Height?: number; // Only for dotBox
@@ -111,11 +111,11 @@ const CircuitDiagramD3: React.FC = () => {
             const line = svg.append('line')
                 .attr('x1', x + offsetX)
                 .attr('y1', y)
-                .attr('x2', orientation === "horizontal" ? x + length + offsetX : x + offsetX)
-                .attr('y2', orientation === "horizontal" ? y : y + length)
+                .attr('x2', orientation === "horizontal" ? x + (length ?? 0) + offsetX : x + offsetX)
+                .attr('y2', orientation === "horizontal" ? y : y + (length ?? 0))
                 .attr('stroke', '#000')
                 .attr('stroke-width', 1.5)
-                .on('click', () => handleElementClick({ type: 'busbar', x: x + offsetX, y }));
+                .on('click', () => handleElementClick({ type: 'busbar', x: x + offsetX, y, length, visible: true }));
 
             line.raise(); // Bring line to front
         };
@@ -125,22 +125,22 @@ const CircuitDiagramD3: React.FC = () => {
                 .attr('href', imgSrc)
                 .attr('x', x + offsetX)
                 .attr('y', y)
-                .attr('width', length)
-                .attr('height', length)
-                .on('click', () => handleElementClick({ type: imgSrc, x: x + offsetX, y }));
+                .attr('width', length ?? 25) // Default width if length is undefined
+                .attr('height', length ?? 25) // Default height if length is undefined
+                .on('click', () => handleElementClick({ type: imgSrc, x: x + offsetX, y, length, visible: true }));
 
-            applyRotation(image, x + offsetX, y, length, orientation);
+            applyRotation(image, x + offsetX, y, length ?? 25, orientation); // Default to 25 if length is undefined
             image.raise(); // Bring image to front
         };
 
         const drawHalfCurve = ({ x, y, length }: CircuitElement, offsetX: number) => {
-            const halfCurvePath = `M${x + offsetX},${y} Q${x + length / 2 + offsetX},${y - length} ${x + length + offsetX},${y}`;
+            const halfCurvePath = `M${x + offsetX},${y} Q${x + (length ?? 30) / 2 + offsetX},${y - (length ?? 30)} ${x + (length ?? 30) + offsetX},${y}`;
             const path = svg.append('path')
                 .attr('d', halfCurvePath)
                 .attr('stroke', '#000')
                 .attr('stroke-width', 2)
                 .attr('fill', 'none')
-                .on('click', () => handleElementClick({ type: 'halfcurve', x: x + offsetX, y }));
+                .on('click', () => handleElementClick({ type: 'halfcurve', x: x + offsetX, y, length, visible: true }));
 
             path.raise(); // Bring path to front
         };
@@ -150,41 +150,34 @@ const CircuitDiagramD3: React.FC = () => {
                 .attr('href', curve)
                 .attr('x', x + offsetX)
                 .attr('y', y)
-                .attr('width', length)
-                .attr('height', length)
-                .on('click', () => handleElementClick({ type: 'curve', x: x + offsetX, y }));
+                .attr('width', length ?? 25) // Default width if length is undefined
+                .attr('height', length ?? 25) // Default height if length is undefined
+                .on('click', () => handleElementClick({ type: 'curve', x: x + offsetX, y, length, visible: true }));
 
             curveImage.raise(); // Bring image to front
         };
 
         const drawText = ({ x, y, content }: CircuitElement, offsetX: number) => {
-            // Create a text element
             const textElement = svg.append('text')
+                .text(content)
                 .attr('x', x + offsetX)
                 .attr('y', y)
-                .text(content)
-                .attr('font-size', '14px')
-                .attr('fill', '#000');
+                .attr('fill', 'black')
+                .on('click', () => handleElementClick({ type: 'text', x: x + offsetX, y, length: 0, visible: true })); // Length can be set to 0 for text
 
-            // Get the bounding box of the text
+            // Adjust the position of the text based on its bounding box
             const bbox = textElement.node()?.getBBox();
+            const padding = 5;
 
-            if (bbox) {
-                // Create a rectangle behind the text for the border
-                svg.append('rect')
-                    .attr('x', bbox.x - 2) // Adding some padding
-                    .attr('y', bbox.y - 2) // Adding some padding
-                    .attr('width', bbox.width + 4) // Adding some padding
-                    .attr('height', bbox.height + 4) // Adding some padding
-                    .attr('fill', 'none')
-                    .attr('stroke', '#000')
-                    .attr('stroke-width', 1);
+            textElement
+                .attr('x', x + offsetX - (bbox?.width ?? 0) / 2)
+                .attr('y', y + (bbox?.height ?? 0) + padding)
+                .on('click', () => handleElementClick({ type: 'text', x: x + offsetX, y, length: bbox?.width ?? 0, visible: true }));
 
-                textElement.raise(); // Bring text to front
-            }
+            textElement.raise(); // Bring text to front
         };
 
-        const drawDottedBox = ({ x, y, row1Height, row2Height, width }: CircuitElement, offsetX: number) => {
+        const drawDottedBox = ({ x, y, row1Height = 50, row2Height = 50, width = 100 }: CircuitElement, offsetX: number) => {
             const rect1 = svg.append('rect')
                 .attr('x', x + offsetX)
                 .attr('y', y)
@@ -210,6 +203,7 @@ const CircuitDiagramD3: React.FC = () => {
         const handleElementClick = (element: CircuitElement) => {
             // Handle element click event
             console.log('Element clicked:', element);
+            alert(`Clicked on: ${JSON.stringify(element)}`);
         };
 
         const applyRotation = (element: any, x: number, y: number, length: number, orientation?: string) => {
